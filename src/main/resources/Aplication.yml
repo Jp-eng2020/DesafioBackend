@@ -1,0 +1,13 @@
+sever:
+  erro:
+    include-stacktrace: on_param
+
+    Spring:
+      datasource:
+        url: jdbc:postgreesql://localhost:5403/filmes?usessl=false&CreateDatabaseIfNotExist=true&allowPublicKeyRetrieval="true"
+        username: root
+        password: root
+
+        jpa:
+          hibernate:
+            dll-auto: update
