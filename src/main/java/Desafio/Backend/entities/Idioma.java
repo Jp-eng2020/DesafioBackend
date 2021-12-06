@@ -3,10 +3,8 @@ package Desafio.Backend.entities;
 import lombok.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+
 @Getter
 @Setter
 @Entity
@@ -16,7 +14,9 @@ import javax.persistence.OneToMany;
 
 
 public class Idioma {
+
     @OneToMany
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tag;
     @OneToMany
