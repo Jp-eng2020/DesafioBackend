@@ -12,15 +12,15 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class IdiomaService {
-    private IdiomaRepository idiomaRepository;
+    private final IdiomaRepository idiomaRepository;
 
 
-    public static List<Idioma> listAllNoPageable(){
+    public List<Idioma> listAllNoPageable(){
         return idiomaRepository.findAll();
     }
 
     public Idioma findById(Long id){
-        return IdiomaRepository.findById(id)
+        return idiomaRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("O Idioma não pode ser econtrado"));
     }
 

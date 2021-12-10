@@ -21,21 +21,21 @@ import java.util.List;
 @RequiredArgsConstructor
 @Log4j2
 public class IdiomaContoller {
-
+    private final IdiomaRepository idiomaRepository;
     private final IdiomaService idiomaService;
 
     @GetMapping
     public List<Idioma> listAllNoPageable(){
-        return IdiomaService.listAllNoPageable();
+        return idiomaService.listAllNoPageable();
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Idioma> findById(@PathVariable long id){
-        return new ResponseEntity(IdiomaService.findById(id), HttpStatus.OK);
+        return new ResponseEntity(idiomaService.findById(id), HttpStatus.OK);
     }
     public Idioma save(IdiomadtoPost idiomadtoPost){
 
-        Idioma idioma = IdiomaRepository.save(Idiomamapper.INSTANCE.toLanguage(idiomadtoPost));
+        Idioma idioma = idiomaRepository.save(Idiomamapper.INSTANCE.toLanguage(idiomadtoPost));
 
         return idioma;
     }

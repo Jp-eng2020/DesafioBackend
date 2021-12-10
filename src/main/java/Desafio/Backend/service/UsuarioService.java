@@ -21,23 +21,38 @@ public class UsuarioService {
     private final IdiomaRepository idiomaRepository;
     private final UsuarioRepository usuarioRepository;
 
-    public List<Usuario> listAllNoPageable(){
+    public List<Usuario> listAllNoPageable() {
         return usuarioRepository.findAll();
     }
 
-    public Usuario findById(Long id){
-        return UsuarioRepository.findById(id)
+    public Usuario findById(Long id) {
+        return usuarioRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("O Usuário não pode ser encontrado"));
     }
 
-    public Usuario save(UsuariodtoPost usuariodtoPost){
+    public Usuario save(UsuariodtoPost usuariodtoPost) {
 
-        Usuario NovoUsuario = Usuariomapper.INSTANCE.toUsers(usuariodtoPost);
+        Usuario novoUsuario = Usuariomapper.INSTANCE.toUsers(usuariodtoPost);
 
-        Optional<Idioma> idioma = IdiomaRepository.findById(NovoUsuario.getLanguage().getId());
+        Optional<Idioma> idioma = idiomaRepository.findById(novoUsuario.getLanguage().getId());
 
         if (idioma.isEmpty()) {
             throw new BadRequestException("O Idioma não pode ser encontrado");
         }
 
+        List<Usuario> emailNotF = usuarioRepository.findByEmail(novoUsuario.getEmail());
+
+        if (!emailNotF.isEmpty()){
+            throw new BadRequestException();
+        }
+
+        List<Usuario> cpfNotFound = usuarioRepository.findByCpf(novoUsuario.getCpf());
+
+        if (!cpfNotFound.isEmpty()){
+            throw new BadRequestException();
+        }
+
+        return usuarioRepository.save(novoUsuario);
+
+    }
 }
