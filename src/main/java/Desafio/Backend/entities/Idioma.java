@@ -18,7 +18,7 @@ public class Idioma {
     @OneToMany
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tag;
+    private Long Id;
     @OneToMany
     private String nome;
 }

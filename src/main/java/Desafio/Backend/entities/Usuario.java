@@ -24,7 +24,7 @@ public class Usuario{
     private String nome;
     @CPF
     @NotEmpty
-    private Long CPF;
+    private String CPF;
     @NotEmpty
     private int telefone;
     @NotEmpty

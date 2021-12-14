@@ -4,6 +4,7 @@ package Desafio.Backend.service;
 import Desafio.Backend.dtos.UsuariodtoPost;
 import Desafio.Backend.entities.Idioma;
 import Desafio.Backend.entities.Usuario;
+import Desafio.Backend.exception.BadRequestException;
 import Desafio.Backend.mappers.Usuariomapper;
 import Desafio.Backend.repository.IdiomaRepository;
 import Desafio.Backend.repository.UsuarioRepository;
@@ -34,7 +35,7 @@ public class UsuarioService {
 
         Usuario novoUsuario = Usuariomapper.INSTANCE.toUsers(usuariodtoPost);
 
-        Optional<Idioma> idioma = idiomaRepository.findById(novoUsuario.getLanguage().getId());
+        Optional<Idioma> idioma = idiomaRepository.findById(novoUsuario.getIdioma().getId());
 
         if (idioma.isEmpty()) {
             throw new BadRequestException("O Idioma não pode ser encontrado");
@@ -43,13 +44,13 @@ public class UsuarioService {
         List<Usuario> emailNotF = usuarioRepository.findByEmail(novoUsuario.getEmail());
 
         if (!emailNotF.isEmpty()){
-            throw new BadRequestException();
+            throw new BadRequestException(" ");
         }
 
-        List<Usuario> cpfNotFound = usuarioRepository.findByCpf(novoUsuario.getCpf());
+        List<Usuario> cpfNotFound = usuarioRepository.findByCpf(novoUsuario.getCPF());
 
         if (!cpfNotFound.isEmpty()){
-            throw new BadRequestException();
+            throw new BadRequestException(" ");
         }
 
         return usuarioRepository.save(novoUsuario);
