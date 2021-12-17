@@ -10,16 +10,19 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Getter
 @Setter
+@Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class UsuariodtoPost {
+public class UsuariodtoPut {
+    @NotEmpty
+    private long id;
+
     @NotEmpty(message = "o nome do Usuário deve ser preenchido ")
     private String nome;
 
-    @CPF(message = "CPF deve ser preenchido com um CPF Válido ")
+    @org.hibernate.validator.constraints.br.CPF(message = "CPF deve ser preenchido com um CPF Válido ")
     private String CPF;
 
     @NotEmpty

@@ -2,6 +2,7 @@ package Desafio.Backend.service;
 
 import Desafio.Backend.dtos.IdiomadtoPost;
 import Desafio.Backend.entities.Idioma;
+import Desafio.Backend.exception.BadRequestException;
 import Desafio.Backend.mappers.Idiomamapper;
 import Desafio.Backend.repository.IdiomaRepository;
 import lombok.RequiredArgsConstructor;
