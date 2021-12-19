@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -16,20 +17,35 @@ public class Filmes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotEmpty
-    private String Titulo;
+    private String titulo;
+
     @NotEmpty
-    private String Sinopse;
+    private String sinopse;
+
     @ManyToOne
-    @NotNull
-    private Idioma idioma;
+    @JoinColumn(name = "categoria_id")
     @NotEmpty
-    private String DataLancamento;
-    @NotEmpty
-    private Long Duracao;
-    @ManyToOne
-    @NotNull
     private Categorias categoria;
 
+    @NotEmpty
+    private String imagem;
+
+    @NotEmpty
+    private String datadeLancamento;
+
+    @NotEmpty
+    private int duracao;
+
+
+    @ManyToOne
+    @JoinColumn(name = "Idioma_id")
+    @NotEmpty
+    private Idioma idioma;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    private LocalDateTime updateAt = LocalDateTime.now();
 
 }

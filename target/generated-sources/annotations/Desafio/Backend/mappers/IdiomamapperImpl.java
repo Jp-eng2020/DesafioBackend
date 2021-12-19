@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-12-16T09:35:35-0300",
+    date = "2021-12-19T13:17:55-0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.9 (Oracle Corporation)"
 )
 @Component
@@ -21,7 +21,9 @@ public class IdiomamapperImpl extends Idiomamapper {
 
         Idioma idioma = new Idioma();
 
-        idioma.setId( idiomadtoPost.getId() );
+        if ( idiomadtoPost.getId() != null ) {
+            idioma.setId( idiomadtoPost.getId() );
+        }
         idioma.setNome( idiomadtoPost.getNome() );
 
         return idioma;
