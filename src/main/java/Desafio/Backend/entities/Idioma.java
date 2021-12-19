@@ -4,6 +4,9 @@ import lombok.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,10 +18,27 @@ import javax.persistence.*;
 
 public class Idioma {
 
-    @OneToMany
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    @OneToMany
+    private long id;
+    @NotEmpty
     private String nome;
+    @NotEmpty
+    private String tag;
+
+    @OneToMany(mappedBy = "Idioma")
+    private List<Usuario> usuarioList;
+
+    @OneToMany(mappedBy = "Idioma")
+    private List<Categorias> categoriaList;
+
+    @OneToMany(mappedBy = "Idioma")
+    private List<Filmes> filmesList;
+
+
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    private LocalDateTime updateAt = LocalDateTime.now();
+
+
 }

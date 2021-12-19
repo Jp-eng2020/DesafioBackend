@@ -3,12 +3,11 @@ package Desafio.Backend.entities;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -17,30 +16,40 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario{
-
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tag;
+    private long id;
+
     @NotEmpty
     private String nome;
+
     @CPF
+    private String cpf;
+
     @NotEmpty
-    private String CPF;
+    private String telefone;
+
     @NotEmpty
-    private int telefone;
-    @NotEmpty
-    private String perfil;
-    @NotEmpty
+    @Email
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "Idioma_id")
+    @NotEmpty
+    private Idioma idioma;
+
     @NotEmpty
     private String senha;
-    @OneToMany
-    //add @join apos a normalização do banco
-    @NotNull
-    private Idioma idioma;
+
     @NotEmpty
+    private String perfil;
+
+    @NotNull
     private String role;
 
+    private LocalDateTime createdAt = LocalDateTime.now();
 
+    private LocalDateTime updateAt = LocalDateTime.now();
 
 
 }

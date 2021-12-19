@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("Usuarios")
+@RequestMapping("/usuarios")
 @RequiredArgsConstructor
 @Log4j2
 public class UsuarioController {

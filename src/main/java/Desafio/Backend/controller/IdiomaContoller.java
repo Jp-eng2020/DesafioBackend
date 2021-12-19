@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("Idioma")
+@RequestMapping("/idioma")
 @RequiredArgsConstructor
 @Log4j2
 public class IdiomaContoller {

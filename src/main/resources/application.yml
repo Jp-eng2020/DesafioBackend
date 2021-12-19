@@ -3,6 +3,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/filmes?usessl=false&CreateDatabaseIfNotExist=true&allowPublicKeyRetrieval="true"
     username: postgres
     password: postgres
+
   jpa:
     hibernate:
       dll-auto: update

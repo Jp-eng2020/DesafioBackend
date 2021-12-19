@@ -48,7 +48,7 @@ public class UsuarioService {
             throw new BadRequestException(" ");
         }
 
-        List<Usuario> cpfNotFound = usuarioRepository.findByCpf(novoUsuario.getCPF());
+        List<Usuario> cpfNotFound = usuarioRepository.findByCpf(novoUsuario.getCpf());
 
         if (!cpfNotFound.isEmpty()){
             throw new BadRequestException(" ");
