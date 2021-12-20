@@ -1,7 +1,6 @@
 package Desafio.Backend.dtos;
 
 import lombok.*;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -11,9 +10,9 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class IdiomadtoPost{
-    @javax.validation.constraints.NotEmpty
-    private Long Id;
+public class IdiomadtoPost {
+    @NotEmpty
+    private Long id;
     @NotEmpty
     private String nome;
 

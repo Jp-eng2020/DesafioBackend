@@ -17,6 +17,7 @@ public class IdiomaService {
 
 
     public List<Idioma> listAllNoPageable(){
+
         return idiomaRepository.findAll();
     }
 

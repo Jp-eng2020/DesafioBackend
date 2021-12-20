@@ -1,7 +1,7 @@
 package Desafio.Backend.service;
 
 
-import Desafio.Backend.dtos.UsuariodtoPost;
+import Desafio.Backend.dtos.UsuarioPost;
 import Desafio.Backend.dtos.UsuariodtoPut;
 import Desafio.Backend.entities.Idioma;
 import Desafio.Backend.entities.Usuario;
@@ -24,38 +24,39 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
     public List<Usuario> listAllNoPageable() {
+
         return usuarioRepository.findAll();
     }
 
-    public Usuario findById(Long id) {
+    public Usuario findById(Long id){
         return usuarioRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("O Usuário não pode ser encontrado"));
+                .orElseThrow(() -> new BadRequestException("Usuario não encontrado"));
     }
 
-    public Usuario save(UsuariodtoPost usuariodtoPost) {
+    public Usuario save(UsuarioPost usuarioPost){
 
-        Usuario novoUsuario = Usuariomapper.INSTACE.toUsuario(usuariodtoPost);
+        Usuario newUsuario = Usuariomapper.INSTANCE.toUsuario(usuarioPost);
 
-        Optional<Idioma> idioma = idiomaRepository.findById(novoUsuario.getIdioma().getId());
+
+        Optional<Idioma> idioma = idiomaRepository.findById(newUsuario.getIdioma().getId());
 
         if (idioma.isEmpty()) {
-            throw new BadRequestException("O Idioma não pode ser encontrado");
+            throw new BadRequestException("Idioma não encontado");
         }
 
-        List<Usuario> emailNotFound = usuarioRepository.findByEmail(novoUsuario.getEmail());
+        List<Usuario> emailNoFound = usuarioRepository.findByEmail(newUsuario.getEmail());
 
-        if (!emailNotFound.isEmpty()){
-            throw new BadRequestException(" ");
+        if (!emailNoFound.isEmpty()){
+            throw new BadRequestException("Email não disponível");
         }
 
-        List<Usuario> cpfNotFound = usuarioRepository.findByCpf(novoUsuario.getCpf());
+        List<Usuario> cpfNotFound = usuarioRepository.findByCpf(newUsuario.getCpf());
 
         if (!cpfNotFound.isEmpty()){
-            throw new BadRequestException(" ");
+            throw new BadRequestException("Cpf Invalido");
         }
 
-        return usuarioRepository.save(novoUsuario);
-
+        return usuarioRepository.save(newUsuario);
     }
 
 

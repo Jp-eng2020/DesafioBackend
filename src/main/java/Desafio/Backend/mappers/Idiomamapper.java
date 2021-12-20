@@ -5,7 +5,7 @@ import Desafio.Backend.entities.Idioma;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "Spring")
 
 public abstract class Idiomamapper {
 

@@ -2,7 +2,6 @@ package Desafio.Backend.dtos;
 
 import Desafio.Backend.entities.Idioma;
 import lombok.*;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -23,7 +22,7 @@ public class UsuariodtoPut {
     private String nome;
 
     @org.hibernate.validator.constraints.br.CPF(message = "CPF deve ser preenchido com um CPF Válido ")
-    private String CPF;
+    private String cpf;
 
     @NotEmpty
     private String telefone;
@@ -36,14 +35,14 @@ public class UsuariodtoPut {
     @Size(min = 8,max = 15)
     private String senha;
 
-    @NonNull
+    @NotEmpty
     private String perfil;
 
     @NotNull(message = "Roles não podem ser vazias")
     private String roles;
 
     @Valid
-    private Idioma language;
+    private Idioma idioma;
 
 
 }

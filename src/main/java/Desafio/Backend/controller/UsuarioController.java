@@ -1,6 +1,6 @@
 package Desafio.Backend.controller;
 
-import Desafio.Backend.dtos.UsuariodtoPost;
+import Desafio.Backend.dtos.UsuarioPost;
 import Desafio.Backend.entities.Idioma;
 import Desafio.Backend.entities.Usuario;
 import Desafio.Backend.service.UsuarioService;
@@ -14,11 +14,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/usuario")
 @RequiredArgsConstructor
 @Log4j2
 public class UsuarioController {
     private final UsuarioService usuarioService;
+
     @GetMapping
     public List<Usuario> listAllNoPageable(){
         return usuarioService.listAllNoPageable();
@@ -31,10 +32,10 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> save(@RequestBody @Valid UsuariodtoPost usuariodtoPost){
-        Usuario usuario = usuarioService.save(usuariodtoPost);
+    public ResponseEntity<Usuario> save(@RequestBody @Valid UsuarioPost usuarioPost){
+        Usuario usuario = usuarioService.save(usuarioPost);
         log.info(usuario);
-        return new ResponseEntity(usuario, HttpStatus.CREATED);
+       return new ResponseEntity(usuario, HttpStatus.CREATED);
     }
 
 

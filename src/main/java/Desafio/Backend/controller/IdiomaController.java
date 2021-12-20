@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/idioma")
 @RequiredArgsConstructor
 @Log4j2
-public class IdiomaContoller {
+public class IdiomaController {
     private final IdiomaRepository idiomaRepository;
     private final IdiomaService idiomaService;
 
