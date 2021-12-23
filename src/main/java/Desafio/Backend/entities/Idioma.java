@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,28 +12,25 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-
 public class Idioma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @NotEmpty
     private String nome;
     @NotEmpty
     private String tag;
 
-    @OneToMany(mappedBy = "Idioma")
+    @OneToMany(mappedBy = "idioma")
     private List<Usuario> usuarioList;
 
-    @OneToMany(mappedBy = "Idioma")
+    @OneToMany(mappedBy = "idioma")
     private List<Categorias> categoriaList;
 
-    @OneToMany(mappedBy = "Idioma")
+    @OneToMany(mappedBy = "idioma")
     private List<Filmes> filmesList;
 
 

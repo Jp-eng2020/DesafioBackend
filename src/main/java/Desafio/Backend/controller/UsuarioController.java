@@ -20,7 +20,7 @@ import java.util.List;
 public class UsuarioController {
     private final UsuarioService usuarioService;
 
-    @GetMapping
+    @GetMapping()
     public List<Usuario> listAllNoPageable(){
         return usuarioService.listAllNoPageable();
     }
@@ -32,11 +32,15 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> save(@RequestBody @Valid UsuarioPost usuarioPost){
+    public ResponseEntity<Usuario> save(@RequestBody UsuarioPost usuarioPost){
         Usuario usuario = usuarioService.save(usuarioPost);
         log.info(usuario);
        return new ResponseEntity(usuario, HttpStatus.CREATED);
     }
 
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Usuario> delete(@PathVariable Long id){
+        return new ResponseEntity(usuarioService.delete(id),HttpStatus.OK);
+    }
 
 }

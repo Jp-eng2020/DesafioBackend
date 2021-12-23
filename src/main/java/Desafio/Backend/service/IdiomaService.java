@@ -21,9 +21,19 @@ public class IdiomaService {
         return idiomaRepository.findAll();
     }
 
+    public Idioma save(IdiomadtoPost idiomadtoPost){
+
+        Idioma idioma = idiomaRepository.save(Idiomamapper.INSTANCE.toLanguage(idiomadtoPost));
+
+        return idioma;
+    }
+
     public Idioma findById(Long id){
         return idiomaRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("O Idioma não pode ser econtrado"));
     }
+
+
+
 
 }

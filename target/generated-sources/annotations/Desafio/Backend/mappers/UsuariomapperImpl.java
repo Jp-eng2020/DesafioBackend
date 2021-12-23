@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-12-20T09:32:56-0300",
+    date = "2021-12-22T10:44:56-0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.13 (Ubuntu)"
 )
 @Component
@@ -23,7 +23,12 @@ public class UsuariomapperImpl extends Usuariomapper {
         Usuario usuario = new Usuario();
 
         usuario.setNome( usuarioPost.getNome() );
+        usuario.setCpf( usuarioPost.getCpf() );
+        usuario.setTelefone( usuarioPost.getTelefone() );
         usuario.setEmail( usuarioPost.getEmail() );
+        usuario.setIdioma( usuarioPost.getIdioma() );
+        usuario.setSenha( usuarioPost.getSenha() );
+        usuario.setPerfil( usuarioPost.getPerfil() );
 
         return usuario;
     }
@@ -38,7 +43,12 @@ public class UsuariomapperImpl extends Usuariomapper {
 
         usuario.setId( usuariodtoPut.getId() );
         usuario.setNome( usuariodtoPut.getNome() );
+        usuario.setCpf( usuariodtoPut.getCpf() );
+        usuario.setTelefone( usuariodtoPut.getTelefone() );
         usuario.setEmail( usuariodtoPut.getEmail() );
+        usuario.setIdioma( usuariodtoPut.getIdioma() );
+        usuario.setSenha( usuariodtoPut.getSenha() );
+        usuario.setPerfil( usuariodtoPut.getPerfil() );
 
         return usuario;
     }

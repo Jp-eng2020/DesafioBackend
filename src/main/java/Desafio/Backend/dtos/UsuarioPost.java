@@ -37,7 +37,7 @@ public class UsuarioPost {
     @NotNull(message = "Roles não podem ser vazias")
     private String roles;
 
-    @Valid
+
     private Idioma idioma;
 
 

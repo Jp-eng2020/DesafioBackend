@@ -10,13 +10,12 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Categorias{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotEmpty
     private String nome;
@@ -29,7 +28,7 @@ public class Categorias{
     @NotEmpty
     private String tag;
 
-    @OneToMany(mappedBy = "categorias")
+    @OneToMany(mappedBy = "categoria")
     private List<Filmes> filmesLista;
 
     private LocalDateTime createdAt = LocalDateTime.now();

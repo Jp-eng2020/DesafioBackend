@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  app:
+    container_name: "desafio-backend"
+    tty: true
+    network_mode: host
+    image: maven:3.8.1-openjdk-11-slim
+    command: bash -c "tail -f /dev/null"
+    working_dir: /usr/src/app
+    volumes:
+      - ".:/usr/src/app"

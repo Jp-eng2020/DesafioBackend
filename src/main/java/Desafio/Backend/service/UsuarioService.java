@@ -11,6 +11,7 @@ import Desafio.Backend.repository.IdiomaRepository;
 import Desafio.Backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,8 +62,33 @@ public class UsuarioService {
 
 
     public Usuario update(UsuariodtoPut usuariodtoPut){
+        Usuario userP = Usuariomapper.INSTANCE.toUsuario(usuariodtoPut);
 
-        return null;
+        Usuario databaseUser = findById(userP.getId());
+
+        List<Usuario> cpfNaoEncontrado = usuarioRepository.findByCpf(userP.getCpf());
+
+        if (cpfNaoEncontrado.size() == 1 && !databaseUser.getCpf().equals(userP.getCpf())){
+            throw new BadRequestException("Cpf invalido");
+        }
+
+
+        List<Usuario> emailNaoEncontrado = usuarioRepository.findByEmail(userP.getEmail());
+
+        if (emailNaoEncontrado.size() == 1 && !databaseUser.getEmail().equals(usuariodtoPut.getEmail())){
+            throw new BadRequestException("Email não disponível");
+        }
+
+        BeanUtils.copyProperties(userP,databaseUser, "createdAt");
+
+        return usuarioRepository.save(databaseUser);
+    }
+
+    public Usuario delete(Long id){
+        Usuario usuario = findById(id);
+        usuario.setActive(false);
+        usuarioRepository.save(usuario);
+        return usuario;
     }
 
 

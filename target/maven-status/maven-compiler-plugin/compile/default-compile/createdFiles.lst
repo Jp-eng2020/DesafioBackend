@@ -1,8 +1,8 @@
-Desafio/Backend/AplicationStart.class
 Desafio/Backend/mappers/Idiomamapper.class
 Desafio/Backend/exception/ExceptionDetails$ExceptionDetailsBuilderImpl.class
 Desafio/Backend/entities/Categorias.class
 Desafio/Backend/dtos/UsuariodtoPut.class
+Desafio/Backend/DesafioWebBackendAplication.class
 Desafio/Backend/handler/RestExceptionHandler.class
 Desafio/Backend/exception/BadRequestExceptionDetails$BadRequestExceptionDetailsBuilderImpl.class
 Desafio/Backend/exception/BadRequestException.class

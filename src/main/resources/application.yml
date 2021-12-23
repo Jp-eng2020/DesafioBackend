@@ -3,9 +3,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/filmes?usessl=false&CreateDatabaseIfNotExist=true&allowPublicKeyRetrieval="true"
     username: postgres
     password: postgres
-
+    driverClassName: org.postgresql.Driver
+    platform: postgres
   jpa:
-    hibernate:
-      dll-auto: update
-
-      driverClassName: org.postgresql.Driver
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        dialect: org.hibernate.dialect.PostgreSQL81Dialect

@@ -18,7 +18,7 @@ public class RestExceptionHandler {
                 BadRequestExceptionDetails.builder()
                         .timestamp(LocalDateTime.now())
                         .status(HttpStatus.BAD_REQUEST.value())
-                        .title("Bad Request Exception, Check the documentation")
+                        .title("Bad Request Exception")
                         .details(badRequestException.getMessage())
                         .developerMessage(badRequestException.getClass().getName())
                         .build(),HttpStatus.BAD_REQUEST

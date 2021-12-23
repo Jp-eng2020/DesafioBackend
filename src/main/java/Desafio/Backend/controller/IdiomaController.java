@@ -35,7 +35,7 @@ public class IdiomaController {
 
 
     @PostMapping
-    public ResponseEntity<Idioma> save(@RequestBody @Valid IdiomadtoPost idiomadtoPost){
+    public ResponseEntity<Idioma> save(@RequestBody IdiomadtoPost idiomadtoPost){
 
         Idioma idioma = idiomaRepository.save(Idiomamapper.INSTANCE.toLanguage(idiomadtoPost));
 

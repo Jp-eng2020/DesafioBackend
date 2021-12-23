@@ -12,13 +12,12 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotEmpty
     private String nome;
@@ -50,6 +49,13 @@ public class Usuario{
     private LocalDateTime createdAt = LocalDateTime.now();
 
     private LocalDateTime updateAt = LocalDateTime.now();
+
+    @Column(nullable=false)
+    private boolean active;
+    @PrePersist
+    public void prePersist(){
+        this.active = true;
+    }
 
 
 }
