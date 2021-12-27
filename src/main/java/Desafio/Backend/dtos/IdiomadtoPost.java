@@ -11,9 +11,10 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 
 public class IdiomadtoPost {
-    @NotEmpty
-    private Long id;
+
     @NotEmpty
     private String nome;
+    @NotEmpty
+    private String tag;
 
 }

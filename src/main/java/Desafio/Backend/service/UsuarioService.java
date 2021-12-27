@@ -38,7 +38,6 @@ public class UsuarioService {
 
         Usuario newUsuario = Usuariomapper.INSTANCE.toUsuario(usuarioPost);
 
-
         Optional<Idioma> idioma = idiomaRepository.findById(newUsuario.getIdioma().getId());
 
         if (idioma.isEmpty()) {

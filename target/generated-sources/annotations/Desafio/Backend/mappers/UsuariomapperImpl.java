@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-12-22T10:44:56-0300",
+    date = "2021-12-27T08:38:15-0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.13 (Ubuntu)"
 )
 @Component
@@ -49,6 +49,9 @@ public class UsuariomapperImpl extends Usuariomapper {
         usuario.setIdioma( usuariodtoPut.getIdioma() );
         usuario.setSenha( usuariodtoPut.getSenha() );
         usuario.setPerfil( usuariodtoPut.getPerfil() );
+        if ( usuariodtoPut.getActive() != null ) {
+            usuario.setActive( usuariodtoPut.getActive() );
+        }
 
         return usuario;
     }

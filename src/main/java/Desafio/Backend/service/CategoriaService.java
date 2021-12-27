@@ -1,11 +1,13 @@
 package Desafio.Backend.service;
 
 import Desafio.Backend.dtos.CategoriaDtoPost;
+import Desafio.Backend.dtos.CategoriaDtoPut;
 import Desafio.Backend.entities.Categorias;
 import Desafio.Backend.exception.BadRequestException;
 import Desafio.Backend.mappers.CategoriaMapper;
 import Desafio.Backend.repository.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,11 +31,34 @@ public class CategoriaService {
     public Categorias save(CategoriaDtoPost categoriaDtoPost){
 
         Categorias categorias = CategoriaMapper.INSTANCE.toCategoria(categoriaDtoPost);
-
         idiomaService.findById(categorias.getIdioma().getId());
-
         return categoriaRepository.save(categorias);
     }
 
+
+
+    public Categorias delete(long id){
+        Categorias categorias = findById(id);
+
+        categorias.setActive(false);
+
+        categoriaRepository.save(categorias);
+
+        return categorias;
+    }
+
+
+    public Categorias update(CategoriaDtoPut categoriaDtoPut){
+
+        Categorias categoriaPut = CategoriaMapper.INSTANCE.toCategoria(categoriaDtoPut);
+
+        Categorias categoriaBanco = findById(categoriaPut.getId());
+
+        idiomaService.findById(categoriaPut.getIdioma().getId());
+
+        BeanUtils.copyProperties(categoriaPut,categoriaBanco, "criado em");
+
+        return categoriaRepository.save(categoriaBanco);
+    }
 
 }

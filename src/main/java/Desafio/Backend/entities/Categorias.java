@@ -22,7 +22,6 @@ public class Categorias{
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idioma_id")
-    @NotEmpty
     private Idioma idioma;
 
     @NotEmpty
@@ -30,6 +29,14 @@ public class Categorias{
 
     @OneToMany(mappedBy = "categoria")
     private List<Filmes> filmesLista;
+
+    @Column(nullable=false)
+    private boolean active;
+    @PrePersist
+    public void prePersist(){
+        this.active = true;
+    }
+
 
     private LocalDateTime createdAt = LocalDateTime.now();
 

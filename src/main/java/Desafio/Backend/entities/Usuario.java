@@ -34,7 +34,6 @@ public class Usuario{
 
     @ManyToOne
     @JoinColumn(name = "Idioma_id")
-    @NotEmpty
     private Idioma idioma;
 
     @NotEmpty

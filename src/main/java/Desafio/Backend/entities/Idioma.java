@@ -1,5 +1,6 @@
 package Desafio.Backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
@@ -23,13 +24,15 @@ public class Idioma {
     private String nome;
     @NotEmpty
     private String tag;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "idioma")
     private List<Usuario> usuarioList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "idioma")
     private List<Categorias> categoriaList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "idioma")
     private List<Filmes> filmesList;
 

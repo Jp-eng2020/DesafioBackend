@@ -46,5 +46,8 @@ public class UsuariodtoPut {
 
     private Idioma idioma;
 
+    @NotNull
+    private Boolean active;
+
 
 }

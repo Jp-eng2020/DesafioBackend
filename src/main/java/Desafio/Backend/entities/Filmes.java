@@ -25,7 +25,6 @@ public class Filmes {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoria_id")
-    @NotEmpty
     private Categorias categoria;
 
     @NotEmpty
@@ -34,14 +33,21 @@ public class Filmes {
     @NotEmpty
     private String datadeLancamento;
 
-    @NotEmpty
+
     private int duracao;
 
 
     @ManyToOne
     @JoinColumn(name = "Idioma_id")
-    @NotEmpty
     private Idioma idioma;
+
+    @Column(nullable=false)
+    private boolean active;
+    @PrePersist
+    public void prePersist(){
+        this.active = true;
+    }
+
 
     private LocalDateTime createdAt = LocalDateTime.now();
 

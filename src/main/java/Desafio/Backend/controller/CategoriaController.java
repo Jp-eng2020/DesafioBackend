@@ -1,6 +1,7 @@
 package Desafio.Backend.controller;
 
 import Desafio.Backend.dtos.CategoriaDtoPost;
+import Desafio.Backend.dtos.CategoriaDtoPut;
 import Desafio.Backend.entities.Categorias;
 import Desafio.Backend.service.CategoriaService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,4 +35,16 @@ public class CategoriaController {
         Categorias categoria = categoriaService.save(categoriaDtoPost);
         return new ResponseEntity(categoria, HttpStatus.CREATED);
     }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Categorias> delete(@PathVariable long id){
+        return new ResponseEntity(categoriaService.delete(id),HttpStatus.OK);
+    }
+
+
+    @PutMapping
+    public ResponseEntity<Categorias> update(@RequestBody @Valid CategoriaDtoPut categoriaDtoPut){
+        return new ResponseEntity(categoriaService.update(categoriaDtoPut),HttpStatus.OK);
+    }
+
 }

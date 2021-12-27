@@ -32,7 +32,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> save(@RequestBody UsuarioPost usuarioPost){
+    public ResponseEntity<Usuario> save(@RequestBody @Valid UsuarioPost usuarioPost){
         Usuario usuario = usuarioService.save(usuarioPost);
         log.info(usuario);
        return new ResponseEntity(usuario, HttpStatus.CREATED);
