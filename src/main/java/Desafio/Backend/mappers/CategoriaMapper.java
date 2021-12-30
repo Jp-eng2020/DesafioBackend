@@ -6,7 +6,7 @@ import Desafio.Backend.entities.Categorias;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "Spring")
+@Mapper(componentModel = "spring")
 public abstract class CategoriaMapper {
 
     public static final CategoriaMapper INSTANCE = Mappers.getMapper(CategoriaMapper.class);

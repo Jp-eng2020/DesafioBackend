@@ -6,10 +6,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.Id;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Setter
 @Getter
@@ -35,16 +32,17 @@ public class UsuariodtoPut {
 
     @NotEmpty(message = "Senha não pode ser vazia")
     @Size(min = 8,max = 15)
-    private String senha;
+    private String password;
 
     @NotEmpty
     private String perfil;
 
     @NotNull(message = "Roles não podem ser vazias")
-    private String roles;
+    private String role;
 
 
-    private Idioma idioma;
+    @Min(value = 0)
+    private long idiomaId;
 
     @NotNull
     private Boolean active;

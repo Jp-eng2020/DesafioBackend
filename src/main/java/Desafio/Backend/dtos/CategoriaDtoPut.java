@@ -22,7 +22,7 @@ public class CategoriaDtoPut {
     private String tag;
 
     @NotNull
-    private Idioma idioma;
+    private long idiomaId;
 
     @NotNull
     private Boolean active;

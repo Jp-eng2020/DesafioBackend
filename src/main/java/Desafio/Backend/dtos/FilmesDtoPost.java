@@ -8,6 +8,7 @@ import lombok.*;
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -24,8 +25,8 @@ public class FilmesDtoPost {
     @NotEmpty
     private String sinopse;
 
-    @NotNull
-    private Categorias categoria;
+    @Min(value = 1)
+    private long categoriaId;
 
     @NotEmpty
     private String imagem;
@@ -33,10 +34,10 @@ public class FilmesDtoPost {
     @NotEmpty
     private String datadeLancamento;
 
-    @NotBlank
+
     private int duracao;
 
-    @NotNull
-    private Idioma idioma;
+    @Min(value = 1)
+    private long idiomaId;
 
 }

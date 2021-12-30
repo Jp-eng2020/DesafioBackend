@@ -4,6 +4,7 @@ import Desafio.Backend.entities.Categorias;
 import Desafio.Backend.entities.Idioma;
 import lombok.*;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -22,8 +23,8 @@ public class FilmesDtoPut {
     @NotEmpty
     private String sinopse;
 
-    @NotNull
-    private Categorias categoria;
+    @Min(value = 1)
+    private long categoriaId;
 
     @NotEmpty
     private String imagem;
@@ -31,11 +32,11 @@ public class FilmesDtoPut {
     @NotEmpty
     private String datadeLancamento;
 
-    @NotBlank
+
     private int duracao;
 
-    @NotNull
-    private Idioma idioma;
+    @Min(value = 1)
+    private long idiomaId;
 
     @NotNull
     private Boolean active;

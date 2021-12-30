@@ -1,5 +1,6 @@
-package Desafio.Backend.exception;
+package Desafio.Backend.exception.badRequest;
 
+import Desafio.Backend.exception.ExceptionDetails;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 

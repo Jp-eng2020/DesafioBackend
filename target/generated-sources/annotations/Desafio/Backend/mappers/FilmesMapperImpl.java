@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-12-27T09:28:54-0300",
+    date = "2021-12-30T08:45:04-0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.13 (Ubuntu)"
 )
 @Component
@@ -24,11 +24,9 @@ public class FilmesMapperImpl extends FilmesMapper {
 
         filmes.setTitulo( filmesDtoPost.getTitulo() );
         filmes.setSinopse( filmesDtoPost.getSinopse() );
-        filmes.setCategoria( filmesDtoPost.getCategoria() );
         filmes.setImagem( filmesDtoPost.getImagem() );
         filmes.setDatadeLancamento( filmesDtoPost.getDatadeLancamento() );
         filmes.setDuracao( filmesDtoPost.getDuracao() );
-        filmes.setIdioma( filmesDtoPost.getIdioma() );
 
         return filmes;
     }
@@ -44,11 +42,9 @@ public class FilmesMapperImpl extends FilmesMapper {
         filmes.setId( filmesDtoPut.getId() );
         filmes.setTitulo( filmesDtoPut.getTitulo() );
         filmes.setSinopse( filmesDtoPut.getSinopse() );
-        filmes.setCategoria( filmesDtoPut.getCategoria() );
         filmes.setImagem( filmesDtoPut.getImagem() );
         filmes.setDatadeLancamento( filmesDtoPut.getDatadeLancamento() );
         filmes.setDuracao( filmesDtoPut.getDuracao() );
-        filmes.setIdioma( filmesDtoPut.getIdioma() );
         if ( filmesDtoPut.getActive() != null ) {
             filmes.setActive( filmesDtoPut.getActive() );
         }

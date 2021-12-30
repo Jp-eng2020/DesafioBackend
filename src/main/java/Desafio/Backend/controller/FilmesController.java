@@ -3,6 +3,7 @@ package Desafio.Backend.controller;
 
 import Desafio.Backend.dtos.FilmesDtoPost;
 import Desafio.Backend.dtos.FilmesDtoPut;
+import Desafio.Backend.entities.Categorias;
 import Desafio.Backend.entities.Filmes;
 import Desafio.Backend.service.FilmesService;
 import lombok.RequiredArgsConstructor;
@@ -28,11 +29,21 @@ public class FilmesController {
         return new ResponseEntity(filmesService.update(filmesDtoPut), HttpStatus.OK);
     }
 
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Filmes> findById(@PathVariable long id){
+        return new ResponseEntity(filmesService.findById(id), HttpStatus.OK);
+    }
+
 
     @PostMapping
     public ResponseEntity<Filmes> save(@RequestBody @Valid FilmesDtoPost filmesDtoPost){
         Filmes filmes = filmesService.save(filmesDtoPost);
         return new ResponseEntity(filmes, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Categorias> delete(@PathVariable long id){
+        return new ResponseEntity(filmesService.delete(id),HttpStatus.OK);
     }
 
 }

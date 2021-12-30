@@ -5,13 +5,17 @@ import Desafio.Backend.dtos.UsuarioPost;
 import Desafio.Backend.dtos.UsuariodtoPut;
 import Desafio.Backend.entities.Idioma;
 import Desafio.Backend.entities.Usuario;
-import Desafio.Backend.exception.BadRequestException;
+import Desafio.Backend.exception.badRequest.BadRequestException;
+import Desafio.Backend.exception.forbbiden.ForbiddenException;
 import Desafio.Backend.mappers.Usuariomapper;
-import Desafio.Backend.repository.IdiomaRepository;
 import Desafio.Backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,9 +24,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 @Log4j2
-public class UsuarioService {
-    private final IdiomaRepository idiomaRepository;
+public class UsuarioService implements UserDetailsService {
+    private final IdiomaService idiomaService;
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder encoder;
 
     public List<Usuario> listAllNoPageable() {
 
@@ -38,49 +43,53 @@ public class UsuarioService {
 
         Usuario newUsuario = Usuariomapper.INSTANCE.toUsuario(usuarioPost);
 
-        Optional<Idioma> idioma = idiomaRepository.findById(newUsuario.getIdioma().getId());
+        Idioma idioma = idiomaService.findById(usuarioPost.getIdiomaId());
 
-        if (idioma.isEmpty()) {
-            throw new BadRequestException("Idioma não encontado");
-        }
+        List<Usuario> emailNaoEncontrado = usuarioRepository.findByEmail(newUsuario.getEmail());
+        if (!emailNaoEncontrado.isEmpty())throw new BadRequestException("Email já registrado no sistema");
 
-        List<Usuario> emailNoFound = usuarioRepository.findByEmail(newUsuario.getEmail());
+        List<Usuario> cpfNaoEncontrado = usuarioRepository.findByCpf(newUsuario.getCpf());
+        if (!cpfNaoEncontrado.isEmpty())throw new BadRequestException("Cpf Já registrado");
 
-        if (!emailNoFound.isEmpty()){
-            throw new BadRequestException("Email não disponível");
-        }
-
-        List<Usuario> cpfNotFound = usuarioRepository.findByCpf(newUsuario.getCpf());
-
-        if (!cpfNotFound.isEmpty()){
-            throw new BadRequestException("Cpf Invalido");
-        }
+        newUsuario.setIdioma(idioma);
+        newUsuario.setActive(true);
+        newUsuario.setPassword(encoder.encode(newUsuario.getPassword()));
 
         return usuarioRepository.save(newUsuario);
     }
 
 
-    public Usuario update(UsuariodtoPut usuariodtoPut){
+    public Usuario update(UsuariodtoPut usuariodtoPut, UserDetails userDetails){
         Usuario userP = Usuariomapper.INSTANCE.toUsuario(usuariodtoPut);
 
-        Usuario databaseUser = findById(userP.getId());
+        userP.setCreatedAt(findById(userP.getId()).getCreatedAt());
 
-        List<Usuario> cpfNaoEncontrado = usuarioRepository.findByCpf(userP.getCpf());
+        Boolean isAdmin = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"));
 
-        if (cpfNaoEncontrado.size() == 1 && !databaseUser.getCpf().equals(userP.getCpf())){
-            throw new BadRequestException("Cpf invalido");
+        if (!isAdmin && !userDetails.getUsername().equals(findById(userP.getId()).getEmail())) {
+            throw new ForbiddenException("Acesso negado!");
+        }
+
+        List<Usuario> cpfNotFound = usuarioRepository.findByCpf(userP.getCpf());
+
+        if (cpfNotFound.size() == 1 && !userP.getCpf().equals(findById(userP.getId()).getCpf())){
+            throw new BadRequestException("Cpf indisponivel");
         }
 
 
         List<Usuario> emailNaoEncontrado = usuarioRepository.findByEmail(userP.getEmail());
 
-        if (emailNaoEncontrado.size() == 1 && !databaseUser.getEmail().equals(usuariodtoPut.getEmail())){
-            throw new BadRequestException("Email não disponível");
+        if (emailNaoEncontrado.size() == 1 && !userP.getEmail().equals(findById(userP.getId()).getEmail())){
+            throw new BadRequestException("Email indisponivel");
         }
 
-        BeanUtils.copyProperties(userP,databaseUser, "createdAt");
+        userP.setPassword(encoder.encode(userP.getPassword()));
 
-        return usuarioRepository.save(databaseUser);
+        Idioma idioma = idiomaService.findById(usuariodtoPut.getIdiomaId());
+
+        userP.setIdioma(idioma);
+
+        return usuarioRepository.save(userP);
     }
 
     public Usuario delete(Long id){
@@ -90,5 +99,10 @@ public class UsuarioService {
         return usuario;
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String email){
+        return Optional.ofNullable(usuarioRepository.findByEmail(email).get(0))
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario nao encontrado"));
+    }
 
 }

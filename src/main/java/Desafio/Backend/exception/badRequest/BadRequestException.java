@@ -1,4 +1,4 @@
-package Desafio.Backend.exception;
+package Desafio.Backend.exception.badRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -2,7 +2,7 @@ package Desafio.Backend.service;
 
 import Desafio.Backend.dtos.IdiomadtoPost;
 import Desafio.Backend.entities.Idioma;
-import Desafio.Backend.exception.BadRequestException;
+import Desafio.Backend.exception.badRequest.BadRequestException;
 import Desafio.Backend.mappers.Idiomamapper;
 import Desafio.Backend.repository.IdiomaRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,6 @@ public class IdiomaService {
     public Idioma save(IdiomadtoPost idiomadtoPost){
 
         Idioma idioma = idiomaRepository.save(Idiomamapper.INSTANCE.toLanguage(idiomadtoPost));
-
         return idioma;
     }
 

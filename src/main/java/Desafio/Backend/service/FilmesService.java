@@ -6,12 +6,11 @@ import Desafio.Backend.dtos.FilmesDtoPut;
 import Desafio.Backend.entities.Categorias;
 import Desafio.Backend.entities.Filmes;
 import Desafio.Backend.entities.Idioma;
-import Desafio.Backend.exception.BadRequestException;
+import Desafio.Backend.exception.badRequest.BadRequestException;
 import Desafio.Backend.mappers.FilmesMapper;
 import Desafio.Backend.repository.FilmesRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,42 +47,32 @@ public class FilmesService {
 
     public Filmes save(FilmesDtoPost filmesDtoPost){
 
-        Filmes filmes = FilmesMapper.INSTANCE.toFilmes(filmesDtoPost);
+        Filmes filme = FilmesMapper.INSTANCE.toFilmes(filmesDtoPost);
 
-        Idioma idiomaCategoria = idiomaService.findById(filmes.getCategoria().getIdioma().getId());
-        Idioma idiomaFilme = idiomaService.findById(filmes.getIdioma().getId());
-        Categorias categorias = categoriaService.findById(filmes.getCategoria().getId());
+        Idioma idiomaFilme = idiomaService.findById(filmesDtoPost.getIdiomaId());
+        Categorias categoriaFilme = categoriaService.findById(filmesDtoPost.getCategoriaId());
 
-        if (!(categorias.getIdioma().getId() == idiomaCategoria.getId())){
-            throw new BadRequestException("");
-        }
-        BeanUtils.copyProperties(idiomaFilme, filmes.getIdioma());
-        BeanUtils.copyProperties(categorias, filmes.getIdioma());
-        BeanUtils.copyProperties(idiomaCategoria, filmes.getCategoria().getIdioma());
+        filme.setIdioma(idiomaFilme);
+        filme.setCategoria(categoriaFilme);
 
-        filmes.setActive(true);
+        filme.setActive(true);
 
-        return filmesRepository.save(filmes);
+        return filmesRepository.save(filme);
     }
 
     public Filmes update(FilmesDtoPut filmesDtoPut){
 
-        Filmes filmes = FilmesMapper.INSTANCE.toFilmes(filmesDtoPut);
+        Filmes filmePut = FilmesMapper.INSTANCE.toFilmes(filmesDtoPut);
 
-        Categorias categorias = categoriaService.findById(filmes.getCategoria().getId());
-        Idioma idiomaCategoria = idiomaService.findById(filmes.getCategoria().getIdioma().getId());
-        Filmes filmeBanco = findById(filmes.getId());
-        Idioma idiomaFilme = idiomaService.findById(filmesDtoPut.getIdioma().getId());
+        filmePut.setCreatedAt(findById(filmePut.getId()).getCreatedAt());
 
-        if (!(categorias.getIdioma().getId() == idiomaCategoria.getId())){
-            throw new BadRequestException("");
-        }
-        BeanUtils.copyProperties(idiomaFilme, filmesDtoPut.getIdioma());
-        BeanUtils.copyProperties(categorias, filmesDtoPut.getCategoria());
-        BeanUtils.copyProperties(idiomaCategoria, filmesDtoPut.getCategoria().getIdioma());
-        BeanUtils.copyProperties(filmesDtoPut,filmeBanco, "createdAt");
+        Idioma idiomaFilme = idiomaService.findById(filmesDtoPut.getIdiomaId());
+        Categorias categoriaFilme = categoriaService.findById(filmesDtoPut.getCategoriaId());
 
-        return filmesRepository.save(filmeBanco);
+        filmePut.setIdioma(idiomaFilme);
+        filmePut.setCategoria(categoriaFilme);
+
+        return filmesRepository.save(filmePut);
     }
 
 

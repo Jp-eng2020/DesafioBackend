@@ -3,7 +3,8 @@ package Desafio.Backend.service;
 import Desafio.Backend.dtos.CategoriaDtoPost;
 import Desafio.Backend.dtos.CategoriaDtoPut;
 import Desafio.Backend.entities.Categorias;
-import Desafio.Backend.exception.BadRequestException;
+import Desafio.Backend.entities.Idioma;
+import Desafio.Backend.exception.badRequest.BadRequestException;
 import Desafio.Backend.mappers.CategoriaMapper;
 import Desafio.Backend.repository.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class CategoriaService {
     public Categorias save(CategoriaDtoPost categoriaDtoPost){
 
         Categorias categorias = CategoriaMapper.INSTANCE.toCategoria(categoriaDtoPost);
-        idiomaService.findById(categorias.getIdioma().getId());
+        categorias.setIdioma(idiomaService.findById(categoriaDtoPost.getIdiomaId()));
         return categoriaRepository.save(categorias);
     }
 
@@ -41,7 +42,6 @@ public class CategoriaService {
         Categorias categorias = findById(id);
 
         categorias.setActive(false);
-
         categoriaRepository.save(categorias);
 
         return categorias;
@@ -52,13 +52,12 @@ public class CategoriaService {
 
         Categorias categoriaPut = CategoriaMapper.INSTANCE.toCategoria(categoriaDtoPut);
 
-        Categorias categoriaBanco = findById(categoriaPut.getId());
+        categoriaPut.setCreatedAt(findById(categoriaPut.getId()).getCreatedAt());
+        Idioma idioma = idiomaService.findById(categoriaDtoPut.getIdiomaId());
+        categoriaPut.setIdioma(idioma);
 
-        idiomaService.findById(categoriaPut.getIdioma().getId());
+        return categoriaRepository.save(categoriaPut);
 
-        BeanUtils.copyProperties(categoriaPut,categoriaBanco, "criado em");
-
-        return categoriaRepository.save(categoriaBanco);
     }
 
 }

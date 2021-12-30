@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -29,16 +30,16 @@ public class UsuarioPost {
     private String email;
 
     @NotEmpty(message = "Senha não pode ser vazia")
-    private String senha;
+    private String password;
 
     @NotEmpty
     private String perfil;
 
-    @NotNull(message = "Roles não podem ser vazias")
-    private String roles;
+    @NotNull(message = "Role não podem ser vazias")
+    private String role;
 
-
-    private Idioma idioma;
+    @Min(value = 0)
+    private long idiomaId;
 
 
 }

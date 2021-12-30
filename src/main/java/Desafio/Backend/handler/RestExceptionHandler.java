@@ -1,8 +1,8 @@
 package Desafio.Backend.handler;
 
 
-import Desafio.Backend.exception.BadRequestException;
-import Desafio.Backend.exception.BadRequestExceptionDetails;
+import Desafio.Backend.exception.badRequest.BadRequestException;
+import Desafio.Backend.exception.badRequest.BadRequestExceptionDetails;
 import Desafio.Backend.exception.ValidationExceptionDetails;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
