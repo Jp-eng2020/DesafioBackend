@@ -8,6 +8,7 @@ import Desafio.Backend.entities.Filmes;
 import Desafio.Backend.service.FilmesService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+
 @RequestMapping("/filmes")
 @ApiResponses(value = {
         @ApiResponse(code = 401, message = "credenciais inválidas"),

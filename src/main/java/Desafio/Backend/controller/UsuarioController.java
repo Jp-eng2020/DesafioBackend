@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+
 @RequestMapping("/usuario")
 @RequiredArgsConstructor
 @Log4j2
