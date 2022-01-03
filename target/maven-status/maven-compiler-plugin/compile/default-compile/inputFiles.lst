@@ -10,6 +10,7 @@
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/Config/SecurityConfig.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/mappers/Usuariomapper.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/entities/Categorias.java
+/home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/Config/SwaggerConfig.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/repository/IdiomaRepository.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/repository/FilmesRepository.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/mappers/CategoriaMapper.java

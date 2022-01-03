@@ -10,6 +10,7 @@ Desafio/Backend/dtos/FilmesDtoPut$FilmesDtoPutBuilder.class
 Desafio/Backend/exception/unauthorized/UnauthorizedExceptionDetails.class
 Desafio/Backend/entities/Idioma.class
 Desafio/Backend/service/UsuarioService.class
+Desafio/Backend/Config/SwaggerConfig.class
 Desafio/Backend/exception/ValidationExceptionDetails$ValidationExceptionDetailsBuilderImpl.class
 Desafio/Backend/repository/UsuarioRepository.class
 Desafio/Backend/exception/ExceptionDetails$ExceptionDetailsBuilder.class

@@ -5,6 +5,8 @@ import Desafio.Backend.dtos.UsuariodtoPut;
 import Desafio.Backend.entities.Idioma;
 import Desafio.Backend.entities.Usuario;
 import Desafio.Backend.service.UsuarioService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,9 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @GetMapping()
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "sucesso"),
+    })
     public List<Usuario> listAllNoPageable(){
         return usuarioService.listAllNoPageable();
     }
@@ -32,12 +37,21 @@ public class UsuarioController {
 
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "sucesso"),
+            @ApiResponse(code = 404, message = "Usuário não encontrado"),
+    })
     public ResponseEntity<Idioma> findById(@PathVariable long id){
         return new ResponseEntity(usuarioService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "sucesso"),
+            @ApiResponse(code = 404, message = "Idioma não encontrado"),
+            @ApiResponse(code = 400, message = "Parametros Inválidos"),
+    })
     public ResponseEntity<Usuario> save(@RequestBody @Valid UsuarioPost usuarioPost){
         Usuario usuario = usuarioService.save(usuarioPost);
        return new ResponseEntity(usuario, HttpStatus.CREATED);
@@ -45,6 +59,10 @@ public class UsuarioController {
 
     @DeleteMapping(path = "/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "sucesso"),
+            @ApiResponse(code = 404, message = "Usuário não encontrado"),
+    })
     public ResponseEntity<Usuario> delete(@PathVariable Long id){
         return new ResponseEntity(usuarioService.delete(id),HttpStatus.OK);
     }
@@ -52,6 +70,10 @@ public class UsuarioController {
 
     @PutMapping
     @PreAuthorize("hasRole('USER')")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "sucesso"),
+            @ApiResponse(code = 404, message = "Usuário não encontrado"),
+    })
     public ResponseEntity<Usuario> update(@RequestBody @Valid UsuariodtoPut usuariodtoPut,
                                         @AuthenticationPrincipal UserDetails userDetails){
 
