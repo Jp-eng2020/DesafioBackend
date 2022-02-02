@@ -1,6 +1,8 @@
 package Desafio.Backend.service;
 
 
+import Desafio.Backend.dtos.UserAutenticateDTO;
+import Desafio.Backend.dtos.UserLoginDto;
 import Desafio.Backend.dtos.UsuarioPost;
 import Desafio.Backend.dtos.UsuariodtoPut;
 import Desafio.Backend.entities.Idioma;
@@ -11,6 +13,7 @@ import Desafio.Backend.mappers.Usuariomapper;
 import Desafio.Backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,4 +109,20 @@ public class UsuarioService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario nao encontrado"));
     }
 
+    public UserLoginDto autenticate(UserAutenticateDTO userAutenticateDTO) {
+        List<Usuario> byEmail = usuarioRepository.findByEmail(userAutenticateDTO.getEmail());
+        if (byEmail.isEmpty()){
+            throw new BadRequestException("ERROR EMAIL Invalido");
+        }
+        if (!encoder.matches(userAutenticateDTO.getPassword(),byEmail.get(0).getPassword())){
+            throw new BadRequestException("Senha invalida");
+        }
+      String token = Base64.getEncoder()
+                .encodeToString((byEmail.get(0).getEmail() + ":" + userAutenticateDTO.getPassword())
+                        .getBytes());
+        log.info("{\"id\": \"" + byEmail.get(0).getId() + "\",\"token\": \"" + token + "\"}");
+        UserLoginDto userLoginDto = new UserLoginDto(byEmail.get(0).getId(), byEmail.get(0).getRole(), token);
+        return userLoginDto;
+
+    }
 }

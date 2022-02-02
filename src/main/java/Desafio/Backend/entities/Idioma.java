@@ -29,7 +29,7 @@ public class Idioma {
     private List<Usuario> usuarioList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "idioma")
+    @OneToMany(mappedBy = "idioma", cascade = CascadeType.ALL)
     private List<Categorias> categoriaList;
 
     @JsonIgnore

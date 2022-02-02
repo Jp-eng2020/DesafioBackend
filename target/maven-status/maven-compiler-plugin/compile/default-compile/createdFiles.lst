@@ -14,6 +14,7 @@ Desafio/Backend/Config/SwaggerConfig.class
 Desafio/Backend/exception/ValidationExceptionDetails$ValidationExceptionDetailsBuilderImpl.class
 Desafio/Backend/repository/UsuarioRepository.class
 Desafio/Backend/exception/ExceptionDetails$ExceptionDetailsBuilder.class
+Desafio/Backend/Config/CorsConfig.class
 Desafio/Backend/dtos/FilmesDtoPost$FilmesDtoPostBuilder.class
 Desafio/Backend/dtos/CategoriaDtoPut.class
 Desafio/Backend/exception/forbbiden/ForbiddenExceptionDetails$ForbiddenExceptionDetailsBuilder.class
@@ -26,6 +27,7 @@ Desafio/Backend/repository/IdiomaRepository.class
 Desafio/Backend/repository/CategoriaRepository.class
 Desafio/Backend/service/IdiomaService.class
 Desafio/Backend/exception/ValidationExceptionDetails$ValidationExceptionDetailsBuilder.class
+Desafio/Backend/dtos/UserLoginDto$UserLoginDtoBuilder.class
 Desafio/Backend/mappers/UsuariomapperImpl.class
 Desafio/Backend/exception/badRequest/BadRequestExceptionDetails.class
 Desafio/Backend/exception/ExceptionDetails$ExceptionDetailsBuilderImpl.class
@@ -36,6 +38,7 @@ Desafio/Backend/DesafioWebBackendAplication.class
 Desafio/Backend/handler/RestExceptionHandler.class
 Desafio/Backend/exception/notFound/NotFoundExeptionDetails$NotFoundExeptionDetailsBuilder.class
 Desafio/Backend/exception/forbbiden/ForbiddenExceptionDetails$ForbiddenExceptionDetailsBuilderImpl.class
+Desafio/Backend/dtos/UserAutenticateDTO$UserAutenticateDTOBuilder.class
 Desafio/Backend/exception/forbbiden/ForbiddenExceptionDetails.class
 Desafio/Backend/dtos/UsuariodtoPut$UsuariodtoPutBuilder.class
 Desafio/Backend/dtos/UsuarioPost.class
@@ -60,6 +63,8 @@ Desafio/Backend/mappers/FilmesMapper.class
 Desafio/Backend/exception/unauthorized/UnauthorizedExceptionDetails$UnauthorizedExceptionDetailsBuilder.class
 Desafio/Backend/service/CategoriaService.class
 Desafio/Backend/exception/ValidationExceptionDetails.class
+Desafio/Backend/dtos/UserAutenticateDTO.class
 Desafio/Backend/controller/IdiomaController.class
 Desafio/Backend/mappers/CategoriaMapperImpl.class
 Desafio/Backend/exception/badRequest/BadRequestExceptionDetails$BadRequestExceptionDetailsBuilderImpl.class
+Desafio/Backend/dtos/UserLoginDto.class

@@ -23,7 +23,7 @@ public class Filmes {
     @NotEmpty
     private String sinopse;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "categoria_id")
     private Categorias categoria;
 

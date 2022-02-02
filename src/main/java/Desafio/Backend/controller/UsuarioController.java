@@ -1,5 +1,7 @@
 package Desafio.Backend.controller;
 
+import Desafio.Backend.dtos.UserAutenticateDTO;
+import Desafio.Backend.dtos.UserLoginDto;
 import Desafio.Backend.dtos.UsuarioPost;
 import Desafio.Backend.dtos.UsuariodtoPut;
 import Desafio.Backend.entities.Idioma;
@@ -16,6 +18,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Path;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -35,6 +38,10 @@ public class UsuarioController {
         return usuarioService.listAllNoPageable();
     }
 
+    @PostMapping(path = "/oauth")
+    public ResponseEntity<UserLoginDto> autenticate(@RequestBody @Valid UserAutenticateDTO userAutenticateDTO){
+        return new ResponseEntity<UserLoginDto>(usuarioService.autenticate(userAutenticateDTO), HttpStatus.OK);
+    }
 
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasRole('ADMIN')")
@@ -42,7 +49,7 @@ public class UsuarioController {
             @ApiResponse(code = 200, message = "sucesso"),
             @ApiResponse(code = 404, message = "Usuário não encontrado"),
     })
-    public ResponseEntity<Idioma> findById(@PathVariable long id){
+    public ResponseEntity<Usuario> findById(@PathVariable long id){
         return new ResponseEntity(usuarioService.findById(id), HttpStatus.OK);
     }
 

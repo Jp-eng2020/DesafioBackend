@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -28,10 +29,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
+                .antMatchers(
+
+                        "/usuario/oauth").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .httpBasic()
+.and()
+                .addFilterBefore(new CorsConfig(), ChannelProcessingFilter.class);
     }
 
     @Override
@@ -39,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.GET,"/idioma/**");
         web.ignoring().antMatchers(HttpMethod.GET,"/categoria/**");
         web.ignoring().antMatchers(HttpMethod.GET,"/filmes/**");
+        web.ignoring().antMatchers(HttpMethod.POST, "/usuarios/oauth");
     }
 
     @Override

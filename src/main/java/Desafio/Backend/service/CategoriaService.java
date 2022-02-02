@@ -8,11 +8,12 @@ import Desafio.Backend.exception.badRequest.BadRequestException;
 import Desafio.Backend.mappers.CategoriaMapper;
 import Desafio.Backend.repository.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Log4j2
 @RequiredArgsConstructor
 @Service
 public class CategoriaService {
@@ -33,6 +34,8 @@ public class CategoriaService {
 
         Categorias categorias = CategoriaMapper.INSTANCE.toCategoria(categoriaDtoPost);
         categorias.setIdioma(idiomaService.findById(categoriaDtoPost.getIdiomaId()));
+        log.info(categorias);
+        categorias.setActive(true);
         return categoriaRepository.save(categorias);
     }
 

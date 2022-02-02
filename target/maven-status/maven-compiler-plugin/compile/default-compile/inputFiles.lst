@@ -1,3 +1,4 @@
+/home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/Config/CorsConfig.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/dtos/FilmesDtoPost.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/exception/ValidationExceptionDetails.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/dtos/CategoriaDtoPut.java
@@ -20,8 +21,10 @@
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/entities/Filmes.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/controller/IdiomaController.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/exception/forbbiden/ForbiddenExceptionDetails.java
+/home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/dtos/UserAutenticateDTO.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/controller/FilmesController.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/entities/Idioma.java
+/home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/dtos/UserLoginDto.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/controller/UsuarioController.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/exception/notFound/NotFoundExeption.java
 /home/joaop/Área de Trabalho/DesafioBackend/src/main/java/Desafio/Backend/exception/unauthorized/UnauthorizedException.java

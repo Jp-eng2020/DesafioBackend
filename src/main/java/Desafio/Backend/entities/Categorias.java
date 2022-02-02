@@ -1,5 +1,6 @@
 package Desafio.Backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,14 +21,15 @@ public class Categorias{
     @NotEmpty
     private String nome;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idioma_id")
+    @ManyToOne()
+    @JoinColumn(name = "idioma_id", referencedColumnName = "id")
     private Idioma idioma;
 
     @NotEmpty
     private String tag;
 
-    @OneToMany(mappedBy = "categoria")
+    @JsonIgnore
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     private List<Filmes> filmesLista;
 
     @Column(nullable=false)
